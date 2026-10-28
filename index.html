@@ -4,8 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
+    <!-- main dashboard -->
+     <div class="dashboard">
+
+        <!-- Header section -->
+            <Header class="Header">
+                <div class="logo">🌥️ SkyCast</div>
+                <div class="location"><span>Colombo, Sri Lanka</span></div>
+
+                <div class="search_box">
+                    <input type="text" id="cityinput" placeholder="Search City...">
+                    <button id="searchBtn">Search</button>
+                </div>
+
+                <div id="themBtn">🌙</div>
+
+            </Header>
+
+            <!-- Main weather section -->
+                <main class="main_content">
+
+                    <!-- current weather -->
+                     <section current_weather>
+
+                        <h2>Today's Weather</h2>
+
+                        <div class="temperature"><span id="temperature">---</span>℃</div>
+                        <div class="weather_icon" id="weathericon">🌤️</div>
+
+                        <p id="weatherdescription">Search for a City</p>
+
+                        <div class="weather_details">
+
+                            <p>
+                                💧 Humidity :
+                            <span id="humidity">---</span>%
+                            </p>
+
+                            <p>
+                                💨 Wind:
+                                <span id="wind">---</span>km/h
+                            </p>
+
+                        </div>
+
+                     </section>
+
+
+                     <!-- weekly forcast -->
+                     <section class="forecast_section">
+
+                        <h2>Next 7 Days</h2>
+
+                        <div class="forcastdetails">
+
+                            
+                        </div>
+
+
+                     </section>
+
+                </main>
+            
+
+
+         
+
+
+
+     </div>
+
+
+    <script src="script.js"></script>
 </body>
 </html>
