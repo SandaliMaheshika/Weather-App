@@ -56,8 +56,15 @@ async function getWeather(city) {
         const weatherRespose = await fetch(weatherURL);
         const weatherData = await weatherRespose.json();
 
+        // Temperature display karanawa
+        document.getElementById("temperature").textContent = weatherData.current.temperature_2m;
 
 
+        //humidity display karnn
+        document.getElementById("humidity").textContent = weatherData.current.relative_humidity_2m;
+
+        //wind display karnn
+        document.getElementById("wind").textContent = weatherData.current.wind_speed_10m;
 
     } catch (error) {
         console.log("Error:", error);
