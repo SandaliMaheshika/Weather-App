@@ -24,16 +24,6 @@ cityinput.addEventListener("keydown", function (event) {
 });
 
 
-// Enter key eka press kalath search wenawa
-cityinput.addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-        searchBtn.click();
-    }
-});
-
-
-
-
 // City eke weather data ganna
 async function getWeather(city) {
     try {
@@ -51,12 +41,30 @@ async function getWeather(city) {
         const cityName = geoData.results[0].name;
         const country = geoData.results[0].country;
 
-        console.log("City:", cityName, country);
-        console.log("Latitude:", latitude);
-        console.log("Longitude:", longitude);
+        //API URL
+        const weatherURL =
+            "https://api.open-meteo.com/v1/forecast?latitude="
+            + latitude
+            + "&longitude="
+            + longitude
+            + "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code"
+            + "&daily=temperature_2m_max,temperature_2m_min,weather_code,precipitation_probability_max"
+            + "&forecast_days=7"
+            + "&timezone=auto";
+
+        //weather data gannwa
+        const weatherRespose = await fetch(weatherURL);
+        const weatherData = await weatherRespose.json();
+
+
+
 
     } catch (error) {
-      
+        console.log("Error:", error);
+        alert("Weather data ganna bari una!");
     }
 
 }
+
+
+
