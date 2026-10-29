@@ -66,13 +66,40 @@ async function getWeather(city) {
         document.getElementById("wind").textContent = weatherData.current.wind_speed_10m;
 
         //location display
-        document.getElementById("location").textContent = cityName + ", " + country;       
-     
+        document.getElementById("location").textContent = cityName + ", " + country;
+
     } catch (error) {
         console.log("Error:", error);
-        alert("Weather data ganna bari una!");
+
     }
 
+
+
+    //7 days forcast display
+    const forcast = document.getElementById("forcastdetails");
+
+    forcast.innerHTML = "";
+
+    for (let i = 0; i < weatherData.daily.time.length; i++) {
+
+        const date = new date(weatherData.daily.time[i] + "T12:00:00");
+        const dayName = date.toLocaleDateString("en-US", { weekday: "short" });
+
+        const maxTemp = weatherData.daily.temperature_2m_max[i];
+        const minTemp = weatherData.daily.temperature_2m_min[i];
+
+        const dayInfo = getWeatherDescription( weatherData.daily.weather_code[i]);
+        const dayElement = document.createElement("div");
+
+        dayElement.innerHTML =
+            "<p>" + dayName + " " + dayInfo[1] + "</p>" +
+            "<p>" + Math.round(maxTemp) + "° / " +
+            Math.round(minTemp) + "°C</p>";
+
+        forcast.appendChild(dayElement);
+
+
+    }
 }
 
 
@@ -105,7 +132,6 @@ const weatherInfo = getWeatherDescription(weatherData.current.weather_code);
 
 document.getElementById("weatherdescription").textContent = weatherInfo[0];
 document.getElementById("weathericon").textContent = weatherInfo[1];
-
 
 
 
