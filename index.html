@@ -36,7 +36,7 @@
 
                 <h2>Today's Weather</h2>
 
-                <div class="temperature"><span id="temperature">---</span>℃</div>
+                <div class="temperature"><span id="temperature">29</span>℃</div>
                 <div class="weather_icon" id="weathericon">🌤️</div>
 
                 <p id="weatherdescription">Search for a City</p>
@@ -45,12 +45,12 @@
 
                     <p>
                         💧 Humidity :
-                        <span id="humidity">---</span>%
+                        <span id="humidity">75</span>%
                     </p>
 
                     <p>
                         💨 Wind:
-                        <span id="wind">---</span>km/h
+                        <span id="wind">7.6</span>km/h
                     </p>
 
                 </div>
@@ -64,26 +64,26 @@
                 <h2>Next 7 Days</h2>
 
                 <div class="forcast_details" id="forcastdetails">
-                    <p><span id="sundayLogo">--</span>Sunday</p>
-                    <p><span id="sunday">--</span>℃</p>
+                    <p><span id="sundayLogo">🌤️</span>Sunday</p>
+                    <p><span id="sunday">28</span>℃</p>
 
-                    <p><span id="mondayLogo">--</span>Monday</p>
-                    <p><span id="monday">--</span>℃</p>
+                    <p><span id="mondayLogo">🌤️</span>Monday</p>
+                    <p><span id="monday">30</span>℃</p>
 
-                    <p><span id="tuesdayLogo">--</span>Tuesday</p>
-                    <p><span id="tuesday">--</span>℃</p>
+                    <p><span id="tuesdayLogo">🌤️</span>Tuesday</p>
+                    <p><span id="tuesday">29</span>℃</p>
 
-                    <p><span id="wednesdayLogo">--</span>Wednesday</p>
-                    <p><span id="wednesday">--</span>℃</p>
+                    <p><span id="wednesdayLogo">🌤️</span>Wednesday</p>
+                    <p><span id="wednesday">31</span>℃</p>
 
-                    <p><span id="thursdayLogo">--</span>Thursday</p>
-                    <p><span id="thursday">--</span>℃</p>
+                    <p><span id="thursdayLogo">🌤️</span>Thursday</p>
+                    <p><span id="thursday">32</span>℃</p>
 
-                    <p><span id="fridayLogo">--</span>Friday</p>
-                    <p><span id="friday">--</span>℃</p>
+                    <p><span id="fridayLogo">🌤️</span>Friday</p>
+                    <p><span id="friday">30</span>℃</p>
 
-                    <p><span id="saturdayLogo">--</span>Saturday</p>
-                    <p><span id="saturday">--</span>℃</p>
+                    <p><span id="saturdayLogo">🌤️</span>Saturday</p>
+                    <p><span id="saturday">30</span>℃</p>
 
                 </div>
 
@@ -96,6 +96,7 @@
                 <h2>Chance Of Rain</h2>
 
                 <div class="rain_chart" id="rainchart">
+                    <canvas id="rainChartCanvas"></canvas>
                 </div>
 
             </section>
@@ -139,7 +140,7 @@
 
     </div>
 
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>
 

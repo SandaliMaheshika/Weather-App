@@ -1,6 +1,8 @@
 const cityinput = document.getElementById("cityinput");
 const searchBtn = document.getElementById("searchBtn");
 
+let rainChart = null;
+
 
 // search btn eka click krirma....
 searchBtn.addEventListener("click", function () {
@@ -68,6 +70,111 @@ async function getWeather(city) {
         //location display
         document.getElementById("location").textContent = cityName + ", " + country;
 
+
+
+        //weather icon
+
+        function getWeatherDescription(code) {
+
+            if (code === 0) {
+                return ["Clear Sky", "☀️"];
+            } else if (code === 1 || code === 2) {
+                return ["Partly Cloudy", "🌤️"];
+            } else if (code === 3) {
+                return ["Cloudy", "☁️"];
+            } else if (code >= 45 && code <= 48) {
+                return ["Foggy", "🌫️"];
+            } else if (code >= 51 && code <= 67) {
+                return ["Drizzle / Rain", "🌧️"];
+            } else if (code >= 71 && code <= 77) {
+                return ["Snow", "❄️"];
+            } else if (code >= 80 && code <= 82) {
+                return ["Rain Showers", "🌦️"];
+            } else if (code >= 95) {
+                return ["Thunderstorm", "⛈️"];
+            } else {
+                return ["Unknown Weather", "🌤️"];
+            }
+        }
+
+        const weatherInfo = getWeatherDescription(weatherData.current.weather_code);
+
+        document.getElementById("weatherdescription").textContent = weatherInfo[0];
+        document.getElementById("weathericon").textContent = weatherInfo[1];
+
+
+        //7 days forcast display
+        const forcast = document.getElementById("forcastdetails");
+
+        forcast.innerHTML = "";
+
+        for (let i = 0; i < weatherData.daily.time.length; i++) {
+
+            const date = new Date(weatherData.daily.time[i] + "T12:00:00");
+            const dayName = date.toLocaleDateString("en-US", { weekday: "short" });
+
+            const maxTemp = weatherData.daily.temperature_2m_max[i];
+            const minTemp = weatherData.daily.temperature_2m_min[i];
+
+            const dayInfo = getWeatherDescription(weatherData.daily.weather_code[i]);
+            const dayElement = document.createElement("div");
+
+            dayElement.innerHTML =
+                "<p>" + dayName + " " + dayInfo[1] + "</p>" +
+                "<p>" + Math.round(maxTemp) + "° / " +
+                Math.round(minTemp) + "°C</p>";
+
+            forcast.appendChild(dayElement);
+
+        }
+
+        function updateRainChart(dailyData) {
+
+            const labels = dailyData.time.map(function (date) {
+                return date.substring(5);
+            });
+
+            const values = dailyData.precipitation_probability_max;
+
+            const ctx = document.getElementById("rainChartCanvas");
+
+            if (rainChart !== null) { rainChart.destroy(); }
+
+            rainChart = new Chart(ctx, {
+                type: "bar",
+
+                data: {
+                    labels: labels,
+
+                    datasets: [{
+                        label: "Chance of Rain (%)",
+                        data: values,
+                        backgroundColor: "#38bdf8",
+                        borderRadius: 8
+                    }]
+                },
+
+                options: {
+                    responsive: true,
+
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+
+                            ticks: {
+                                callback: function (value) {
+                                    return value + "%";
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        updateRainChart(weatherData.daily);
+
     } catch (error) {
         console.log("Error:", error);
 
@@ -75,63 +182,6 @@ async function getWeather(city) {
 
 
 
-    //7 days forcast display
-    const forcast = document.getElementById("forcastdetails");
 
-    forcast.innerHTML = "";
-
-    for (let i = 0; i < weatherData.daily.time.length; i++) {
-
-        const date = new date(weatherData.daily.time[i] + "T12:00:00");
-        const dayName = date.toLocaleDateString("en-US", { weekday: "short" });
-
-        const maxTemp = weatherData.daily.temperature_2m_max[i];
-        const minTemp = weatherData.daily.temperature_2m_min[i];
-
-        const dayInfo = getWeatherDescription( weatherData.daily.weather_code[i]);
-        const dayElement = document.createElement("div");
-
-        dayElement.innerHTML =
-            "<p>" + dayName + " " + dayInfo[1] + "</p>" +
-            "<p>" + Math.round(maxTemp) + "° / " +
-            Math.round(minTemp) + "°C</p>";
-
-        forcast.appendChild(dayElement);
-
-
-    }
 }
-
-
-//weather icon
-
-function getWeatherDescription(code) {
-
-    if (code === 0) {
-        return ["Clear Sky", "☀️"];
-    } else if (code === 1 || code === 2) {
-        return ["Partly Cloudy", "🌤️"];
-    } else if (code === 3) {
-        return ["Cloudy", "☁️"];
-    } else if (code >= 45 && code <= 48) {
-        return ["Foggy", "🌫️"];
-    } else if (code >= 51 && code <= 67) {
-        return ["Drizzle / Rain", "🌧️"];
-    } else if (code >= 71 && code <= 77) {
-        return ["Snow", "❄️"];
-    } else if (code >= 80 && code <= 82) {
-        return ["Rain Showers", "🌦️"];
-    } else if (code >= 95) {
-        return ["Thunderstorm", "⛈️"];
-    } else {
-        return ["Unknown Weather", "🌤️"];
-    }
-}
-
-const weatherInfo = getWeatherDescription(weatherData.current.weather_code);
-
-document.getElementById("weatherdescription").textContent = weatherInfo[0];
-document.getElementById("weathericon").textContent = weatherInfo[1];
-
-
 
