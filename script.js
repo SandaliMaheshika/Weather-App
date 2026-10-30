@@ -157,10 +157,9 @@ async function getWeather(city) {
             const dayElement = document.createElement("div");
 
             dayElement.innerHTML =
-                "<p>" + dayName + " " + dayInfo[1] + "</p>" +
-                "<p>" + Math.round(maxTemp) + "° / " +
-                Math.round(minTemp) + "°C</p>";
-
+                "<p>" + dayName + "</p>" +
+                "<span class='forecast-icon'>" + dayInfo[1] + "</span>" +
+                "<p>" + Math.round(maxTemp) + "°</p>";
             forcast.appendChild(dayElement);
 
         }
