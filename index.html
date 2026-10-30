@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather App</title>
 
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -39,6 +41,7 @@
                 <div class="temperature"><span id="temperature">29</span>℃</div>
                 <div class="weather_icon" id="weathericon">🌤️</div>
 
+               
                 <div class="weather_details">
 
                     <p>
@@ -63,40 +66,40 @@
 
                 <div class="forcast_details" id="forcastdetails">
                     <div>
-                        <p><span id="sundayLogo">🌤️</span>Sunday</p>
-                        <p><span id="sunday">28</span>℃</p>
+                    <p><span id="sundayLogo">🌤️</span>Sunday</p>
+                    <p><span id="sunday">28</span>℃</p>
                     </div>
 
                     <div>
-                        <p><span id="mondayLogo">🌤️</span>Monday</p>
-                        <p><span id="monday">30</span>℃</p>
+                    <p><span id="mondayLogo">🌤️</span>Monday</p>
+                    <p><span id="monday">30</span>℃</p>
                     </div>
 
                     <div>
-                        <p><span id="tuesdayLogo">🌤️</span>Tuesday</p>
-                        <p><span id="tuesday">29</span>℃</p>
+                    <p><span id="tuesdayLogo">🌤️</span>Tuesday</p>
+                    <p><span id="tuesday">29</span>℃</p>
+                    </div>
+
+                    <div>    
+                    <p><span id="wednesdayLogo">🌤️</span>Wednesday</p>
+                    <p><span id="wednesday">31</span>℃</p>
                     </div>
 
                     <div>
-                        <p><span id="wednesdayLogo">🌤️</span>Wednesday</p>
-                        <p><span id="wednesday">31</span>℃</p>
-                    </div>
-
-                    <div>
-                        <p><span id="thursdayLogo">🌤️</span>Thursday</p>
-                        <p><span id="thursday">32</span>℃</p>
-                    </div>
-
-
-                    <div>
-                        <p><span id="fridayLogo">🌤️</span>Friday</p>
-                        <p><span id="friday">30</span>℃</p>
+                    <p><span id="thursdayLogo">🌤️</span>Thursday</p>
+                    <p><span id="thursday">32</span>℃</p>
                     </div>
 
 
                     <div>
-                        <p><span id="saturdayLogo">🌤️</span>Saturday</p>
-                        <p><span id="saturday">30</span>℃</p>
+                    <p><span id="fridayLogo">🌤️</span>Friday</p>
+                    <p><span id="friday">30</span>℃</p>
+                    </div>
+
+
+                    <div>
+                    <p><span id="saturdayLogo">🌤️</span>Saturday</p>
+                    <p><span id="saturday">30</span>℃</p>
                     </div>
 
                 </div>
@@ -109,7 +112,7 @@
 
                 <h2>Chance Of Rain</h2>
 
-                <div class="rain_chart" id="rainchart">
+                <div id="rainchart">
                     <canvas id="rainChartCanvas"></canvas>
                 </div>
 
@@ -154,6 +157,7 @@
 
     </div>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 </body>

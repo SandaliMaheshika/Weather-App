@@ -26,6 +26,35 @@ cityinput.addEventListener("keydown", function (event) {
 });
 
 
+
+// Create Weather Map
+const map = L.map("weatherMap").setView([7.8731, 80.7718], 7);
+
+L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+let weatherMarker = null;
+
+
+// Update Weather Map
+function updateWeatherMap(latitude, longitude, cityName, temperature, icon, description) {
+
+    if (weatherMarker !== null) {
+        map.removeLayer(weatherMarker);
+    }
+
+    map.setView([latitude, longitude], 8);
+
+    weatherMarker = L.marker([latitude, longitude]).addTo(map);
+
+    weatherMarker.bindPopup(
+        "<h3>" + cityName + "</h3>" +
+        "<h2>" + icon + " " + temperature + "°C</h2>" +
+        "<p>" + description + "</p>"
+    );
+}
+
 // City eke weather data ganna
 async function getWeather(city) {
     try {
@@ -99,9 +128,17 @@ async function getWeather(city) {
 
         const weatherInfo = getWeatherDescription(weatherData.current.weather_code);
 
-        document.getElementById("weatherdescription").textContent = weatherInfo[0];
         document.getElementById("weathericon").textContent = weatherInfo[1];
 
+        // Update Weather Map
+        updateWeatherMap(
+            latitude,
+            longitude,
+            cityName,
+            weatherData.current.temperature_2m,
+            weatherInfo[1],
+            weatherInfo[0]
+        );
 
         //7 days forcast display
         const forcast = document.getElementById("forcastdetails");
